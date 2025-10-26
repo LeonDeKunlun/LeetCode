@@ -6,11 +6,11 @@ class Solution:
             return []
 
         s_len = len(s)
-        palindromes = defaultdict(deque)
+        palindromes = defaultdict(dict)
 
         def palindrome_backtrack(start, end):
             if 0 <= start and end < s_len and s[start] == s[end]:
-                palindromes[start].append(end)
+                palindromes[start][end] = s[start : end+1]
                 palindrome_backtrack(start-1, end+1)
 
         for i in range(s_len):
@@ -24,8 +24,8 @@ class Solution:
                 results.append(list(partition))
                 return
 
-            for end in palindromes[start]:
-                partition.append(s[start : end+1])
+            for end, palindrome in palindromes[start].items():
+                partition.append(palindrome)
                 partition_backtrack(partition, end+1)
                 partition.pop()
 
