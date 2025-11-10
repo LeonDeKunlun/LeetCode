@@ -8,10 +8,8 @@ class Solution:
         r_index = len(nums)
         while l_index < r_index:
             m_index = (l_index + r_index) >> 1
-            m = nums[m_index]
-            if target <= m:
-                r_index = m_index
-            elif m < target:
+            if nums[m_index] < target:
                 l_index = m_index + 1
-
+            else: # if target <= nums[m_index]
+                r_index = m_index
         return r_index
